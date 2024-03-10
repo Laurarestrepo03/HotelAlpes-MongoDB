@@ -1,0 +1,63 @@
+db.tipos_habitacion.insertMany([
+    {
+        "_id": 1,
+        "nombre": "Familiar",
+        "capacidad": 8,
+        "dotacion_incluida": [
+            {
+                "_id": 1,
+                "nombre": "Cama",
+                "cantidad": 3
+            },
+            {
+                "_id": 2,
+                "nombre": "Cocina",
+                "cantidad": 1
+            },
+            {
+                "_id": 3,
+                "nombre": "Comedor",
+                "cantidad": 1
+            }
+        ]
+    },
+    {
+        "_id": 2,
+        "nombre": "Suite",
+        "capacidad": 6,
+        "dotacion_incluida": [
+            {
+                "_id": 1,
+                "nombre": "Cama",
+                "cantidad": 2
+            },
+            {
+                "_id": 2,
+                "nombre": "Jacuzzi",
+                "cantidad": 1
+            },
+            {
+                "_id": 3,
+                "nombre": "Caja fuerte",
+                "cantidad": 1
+            }
+        ]
+    },
+    {
+        "_id": 3,
+        "nombre": "Doble",
+        "capacidad": 2,
+        "dotacion_incluida": [
+            {
+            "_id": 1,
+            "nombre": "Cama",
+            "cantidad": 2
+            },
+            {
+            "_id": 2,
+            "nombre": "Caja fuerte",
+            "cantidad": 1
+            }
+        ]
+    }
+])

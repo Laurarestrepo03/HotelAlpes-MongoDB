@@ -1,0 +1,206 @@
+db.habitaciones.insertMany([
+    {
+        "_id": 101,
+        "costo_noche": 100000,
+        "tipo": 1,
+        "consumos": [
+            {
+                "_id": 1,
+                "servicio": 4,
+                "cliente": "1006",
+                "fecha": "2023-11-26",
+                "hora": "14:00"
+            }
+        ],
+        "reservas": [
+            {
+                "codigo": 1,
+                "fecha_entrada": "2023-11-19",
+                "fecha_salida": "2023-12-02",
+                "estado": "Entro",
+                "num_huespedes": 1,
+                "cliente": {
+                    "num_documento": "1006",
+                    "tipo_documento": "CC",
+                    "nombre": "Laura",
+                    "correo": "l.restrepop@uniandes.edu.co"
+                }
+            }
+        ]
+    },
+    {
+        "_id": 201,
+        "costo_noche": 200000,
+        "tipo": 1,
+        "consumos": [
+            {
+                "_id": 2,
+                "servicio": 1,
+                "cliente": "1007",
+                "fecha": "2022-11-20",
+                "hora": "15:00"
+            }
+        ],
+        "reservas": [
+            {
+                "codigo": 2,
+                "fecha_entrada": "2022-11-19",
+                "fecha_salida": "2022-12-02",
+                "estado": "Salio sin deuda",
+                "num_huespedes": 1,
+                "cliente": {
+                    "num_documento": "1007",
+                    "tipo_documento": "CC",
+                    "nombre": "Juan",
+                    "correo": "j.yepesp@uniandes.edu.co"
+                }
+            }
+        ]
+    },
+    {
+        "_id": 301,
+        "costo_noche": 300000,
+        "tipo": 1,
+        "reservas": [
+            {
+                "codigo": 3,
+                "fecha_entrada": "2024-11-19",
+                "fecha_salida": "2024-12-02",
+                "estado": "Por entrar",
+                "num_huespedes": 1,
+                "cliente": {
+                    "num_documento": "1008",
+                    "tipo_documento": "CC",
+                    "nombre": "Lindsay",
+                    "correo": "l.pintom@uniandes.edu.co"
+                }
+            }
+        ],
+        "consumos": [
+            {
+                "_id": 3,
+                "servicio": 2,
+                "cliente": "1008",
+                "fecha": "2023-11-21",
+                "hora": "16:00"
+            }
+        ]
+    },
+    {
+        "_id": 102,
+        "costo_noche": 150000,
+        "tipo": 3,
+        "reservas": [
+            {
+                "codigo": 4,
+                "fecha_entrada": "2023-01-01",
+                "fecha_salida": "2023-12-01",
+                "estado": "Entro",
+                "num_huespedes": 2,
+                "cliente": {
+                    "num_documento": "3006",
+                    "tipo_documento": "CC",
+                    "nombre": "prueba",
+                    "correo": "p@p.com"
+                }
+            }
+        ]
+    },
+    {
+        "_id": 202,
+        "costo_noche": 250000,
+        "tipo": 3,
+        "consumos": [
+            {
+                "_id": 4,
+                "servicio": 1,
+                "cliente": "1007",
+                "fecha": "2023-11-20",
+                "hora": "15:00"
+            },
+            {
+                "_id": 5,
+                "servicio": 1,
+                "cliente": "1007",
+                "fecha": "2023-11-20",
+                "hora": "16:00"
+            }
+        ],
+        "reservas": [
+            {
+                "codigo": 8,
+                "fecha_entrada": "2023-11-19",
+                "fecha_salida": "2023-12-02",
+                "estado": "Entro",
+                "num_huespedes": 1,
+                "cliente": {
+                    "num_documento": "1007",
+                    "tipo_documento": "CC",
+                    "nombre": "Juan",
+                    "correo": "j.yepesp@uniandes.edu.co"
+                }
+            }
+        ]
+    },
+    {
+        "_id": 302,
+        "costo_noche": 350000,
+        "tipo": 3
+    },
+    {
+        "_id": 103,
+        "costo_noche": 200000,
+        "tipo": 2
+    },
+    {
+        "_id": 203,
+        "costo_noche": 300000,
+        "tipo": 2
+    },
+    {
+        "_id": 303,
+        "costo_noche": 400000,
+        "tipo": 2,
+        "reservas": [
+            {
+                "codigo": 5,
+                "fecha_entrada": "2023-01-01",
+                "fecha_salida": "2023-01-08",
+                "estado": "Entro",
+                "num_huespedes": 1,
+                "cliente": {
+                    "num_documento": "1006",
+                    "tipo_documento": "CC",
+                    "nombre": "Laura",
+                    "correo": "l.restrepop@uniandes.edu.co"
+                }
+            },
+            {
+                "codigo": 6,
+                "fecha_entrada": "2022-11-19",
+                "fecha_salida": "2022-12-02",
+                "estado": "Salio sin deuda",
+                "num_huespedes": 1,
+                "cliente": {
+                    "num_documento": "1007",
+                    "tipo_documento": "CC",
+                    "nombre": "Juan",
+                    "correo": "j.yepesp@uniandes.edu.co"
+                }
+            },
+            {
+                "codigo": 7,
+                "fecha_entrada": "2023-11-19",
+                "fecha_salida": "2023-12-02",
+                "estado": "Por entrar",
+                "num_huespedes": 1,
+                "cliente": {
+                    "num_documento": "1008",
+                    "tipo_documento": "CC",
+                    "nombre": "Lindsay",
+                    "correo": "l.pintom@uniandes.edu.co"
+                }
+            }
+        ]
+    }
+]);

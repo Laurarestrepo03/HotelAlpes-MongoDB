@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fecha no mayor</title>
+    <link rel="stylesheet" text="text/css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div class="text-center">
+        <img class="mt-4 mb-4" th:src="@{/images/warning.png}" width="250" alt="warning"></img>
+        <h3 class="mb-5">¡Ups! La fecha de salida no es mayor a la fecha de entrada</h3>
+        <a th:href="@{/reservas}" class="btn btn-primary">Aceptar</a>
+    </div>
+</body>
+</html>

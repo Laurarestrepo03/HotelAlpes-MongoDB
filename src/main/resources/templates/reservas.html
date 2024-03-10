@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resevas</title>
+    <link rel="stylesheet" text="text/css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="mt-4 mb-4">Reservas de alojamiento</h1>
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Código</th>
+                    <th>Fecha entrada</th>
+                    <th>Fecha salida</th>
+                    <th>Cliente</th>
+                    <th>Habitación</th>
+                    <th>Número de huespedes</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <th:block th:each="reserva:${reservas}">
+                <tr>
+                    <td th:text="${reserva.codigo}"></td>
+                    <td th:text="${reserva.fecha_entrada}"></td>
+                    <td th:text="${reserva.fecha_salida}"></td>
+                    <td> <a th:href="@{reservas/{codigo}/cliente(codigo=${reserva.codigo})}">Ver</a> </td>
+                    <td th:text="${reserva.habitacion}"></td>
+                    <td th:text="${reserva.num_huespedes}"></td>
+                    <td th:text="${reserva.estado}"></td>
+                    <td>
+                        <a th:href="@{reservas/{codigo}/edit(codigo=${reserva.codigo})}">Editar</a>
+                        <a th:href="@{reservas/{codigo}/delete(codigo=${reserva.codigo})}"
+                        onClick="return confirm('¿Estás seguro de borrar esta reserva?')">Borrar</a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+        <div class="mt-4 mb-4">
+            <a th:href="@{/}" class="btn btn-primary mr-1">Volver atrás</a>
+            <a th:href="@{reservas/new}" class="btn btn-primary">Añadir reserva </a>
+        </div>
+    </div>
+</body>
+</html>

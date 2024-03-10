@@ -1,0 +1,155 @@
+db.habitaciones.aggregate([
+    { $unwind: { path: '$reservas', preserveNullAndEmptyArrays: true } },
+    {
+        $project: {
+            _id: 1,
+            total_dias: {
+                $ifNull: [
+                    {
+                        $divide: [
+                            {
+                                $add: [
+                                    {
+                                        $cond: [
+                                            {
+                                                $and: [
+                                                    { $gte: [{ $toDate: '$reservas.fecha_entrada' }, { $toDate: '2023-01-01' }] },
+                                                    { $lte: [{ $toDate: '$reservas.fecha_salida' }, { $toDate: '2023-12-01' }] }
+                                                ]
+                                            },
+                                            {
+                                                $subtract: [
+                                                    { $toDate: '$reservas.fecha_salida' },
+                                                    { $toDate: '$reservas.fecha_entrada' }
+                                                ]
+                                            },
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        $cond: [
+                                            {
+                                                $and: [
+                                                    { $gt: [{ $toDate: '$reservas.fecha_salida' }, { $toDate: '2023-12-01' }] },
+                                                    { $gte: [{ $toDate: '$reservas.fecha_entrada' }, { $toDate: '2023-01-01' }] },
+                                                    { $lte: [{ $toDate: '$reservas.fecha_entrada' }, { $toDate: '2023-12-01' }] }
+                                                ]
+                                            },
+                                            {
+                                                $subtract: [
+                                                    { $toDate: '2023-12-01' },
+                                                    { $toDate: '$reservas.fecha_entrada' }
+                                                ]
+                                            },
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        $cond: [
+                                            {
+                                                $and: [
+                                                    { $lt: [{ $toDate: '$reservas.fecha_entrada' }, { $toDate: '2023-01-01' }] },
+                                                    { $lte: [{ $toDate: '$reservas.fecha_salida' }, { $toDate: '2023-12-01' }] },
+                                                    { $gte: [{ $toDate: '$reservas.fecha_salida' }, { $toDate: '2023-01-01' }] }
+                                                ]
+                                            },
+                                            {
+                                                $subtract: [
+                                                    { $toDate: '$reservas.fecha_salida' },
+                                                    { $toDate: '2023-01-01' }
+                                                ]
+                                            },
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        $cond: [
+                                            {
+                                                $and: [
+                                                    { $lte: [{ $toDate: '$reservas.fecha_entrada' }, { $toDate: '2023-01-01' }] },
+                                                    { $gte: [{ $toDate: '$reservas.fecha_salida' }, { $toDate: '2023-12-01' }] }
+                                                ]
+                                            },
+                                            334,
+                                            0
+                                        ]
+                                    }
+                                ]
+                            },
+                            86400000
+                        ]
+                    },
+                    0
+                ]
+            }
+        }
+    },
+    {
+        $group: {
+            _id: '$_id',
+            total_dias: { $sum: '$total_dias' }
+        }
+    },
+    {
+        $project: {
+            _id: 0,
+            habitacion: '$_id',
+            porcentaje: {
+                $round: [
+                    {
+                        $multiply: [
+                            {
+                                $divide: [
+                                    '$total_dias',
+                                    334
+                                ]
+                            },
+                            100
+                        ]
+                    },
+                    2
+                ]
+            }
+        }
+    },
+    { $sort: { habitacion: 1 } }
+]);
+
+
+Esto debería devolver:
+{
+  _id: 101,
+  porcentaje: 3.59
+},
+{
+  _id: 102,
+  porcentaje: 100
+},
+{
+  _id: 103,
+  porcentaje: 0
+},
+{
+  _id: 201,
+  porcentaje: 0
+},
+{
+  _id: 202,
+  porcentaje: 3.59
+},
+{
+  _id: 203,
+  porcentaje: 0
+}
+{
+  _id: 301,
+  porcentaje: 0
+},
+{
+  _id: 302,
+  porcentaje: 0
+},
+{
+  _id: 303,
+  porcentaje: 2.1
+}

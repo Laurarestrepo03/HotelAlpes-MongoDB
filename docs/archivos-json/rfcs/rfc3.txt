@@ -1,0 +1,17 @@
+db.habitaciones.aggregate([
+    {$unwind: '$consumos'},
+    {$match: {'consumos.cliente': ?0, 'consumos.fecha': {$gte: ?1, $lte: ?2}}},
+    {$lookup: {from: 'servicios', localField: 'consumos.servicio', foreignField: '_id', as: 'servicio'}},
+    {$unwind: '$servicio'},
+    {
+        $project: {
+            '_id': '$consumos._id',
+            'servicio': '$servicio.nombre',
+            'cliente': '$consumos.cliente',
+            'habitacion': '$_id',
+            'costo': '$servicio.precio',
+            'fecha': '$consumos.fecha',
+            'hora': '$consumos.hora'
+        }
+    }
+])

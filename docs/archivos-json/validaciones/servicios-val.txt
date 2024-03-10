@@ -1,0 +1,72 @@
+{
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      '_id',
+      'nombre',
+      'tipo_cobro',
+      'precio',
+      'capacidad',
+      'costo_adicional'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'int'
+      },
+      nombre: {
+        bsonType: 'string'
+      },
+      tipo_cobro: {
+        'enum': [
+          'Habitacion',
+          'Por dia',
+          'Alojamiento',
+          'Gratuito'
+        ]
+      },
+      precio: {
+        bsonType: [
+          'int',
+          'double'
+        ]
+      },
+      capacidad: {
+        bsonType: 'int'
+      },
+      costo_adicional: {
+        bsonType: [
+          'int',
+          'double'
+        ]
+      },
+      estilo: {
+        bsonType: 'string'
+      },
+      productos: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'object',
+          required: [
+            '_id',
+            'nombre',
+            'precio'
+          ],
+          properties: {
+            _id: {
+              bsonType: 'int'
+            },
+            nombre: {
+              bsonType: 'string'
+            },
+            precio: {
+              bsonType: [
+                'int',
+                'double'
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

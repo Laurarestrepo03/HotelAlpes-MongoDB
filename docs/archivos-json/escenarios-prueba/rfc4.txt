@@ -1,0 +1,73 @@
+db.habitaciones.aggregate([
+  {
+    $unwind: "$reservas"
+  },
+  {
+    $unwind: "$consumos"
+  },
+  {
+    $match: {
+      $expr: {
+        $eq: ["$consumos.cliente", "$reservas.cliente.num_documento"]
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      cliente: "$reservas.cliente",
+      fecha_consumo: "$consumos.fecha",
+      servicio_consumo: "$consumos.servicio",
+    }
+  },
+  {
+    $group: {
+      _id: {
+        cliente: "$cliente",
+        servicio: "$servicio_consumo",
+        fecha: "$fecha_consumo"
+      },
+      veces: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      cliente: "$_id.cliente",
+      servicio: "$_id.servicio",
+      fecha: "$_id.fecha",
+      veces: 1
+    }
+  },
+  {
+    $match: {
+        servicio: 1,
+        fecha: { $regex: "" },
+        $expr: {
+            $cond: {
+                if: { $eq: [2, null] },
+                then: {},
+                else: { $eq: ["$veces", 2] }
+            }
+        },
+        "cliente.num_documento": { $regex: "" },
+        "cliente.tipo_documento": { $regex: "" },
+        "cliente.nombre": { $regex: "" },
+        "cliente.correo": { $regex: "" }
+    }
+  }
+]);
+
+
+Esto debería devoler:
+{
+  veces: 2,
+  cliente: {
+    num_documento: '1007',
+    tipo_documento: 'CC',
+    nombre: 'Juan',
+    correo: 'j.yepesp@uniandes.edu.co'
+  },
+  servicio: 1,
+  fecha: '2023-11-20'
+}

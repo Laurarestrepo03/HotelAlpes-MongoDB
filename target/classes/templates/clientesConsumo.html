@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clientes consumo</title>
+    <link rel="stylesheet" text="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container w-25 mt-4">
+        
+        <h3 class="card-header text-center" role='button' id="headingOne">
+            <a class="collapsed d-block" data-toggle="collapse" data-target="#busqueda"> Buscar por: </a>
+        </h3>
+        
+        <div id="busqueda" class="collapse">
+            <form th:action="@{/consumos/clientes}" method="get">
+
+                <label class="col-form-label" for="servicio">Servicio consumido</label>
+                <select class="form-control"  id="servicio" name="servicio" required>
+                    <th:block th:each="servicio: ${servicios}">
+                        <option th:value="${servicio.id}" th:text="${servicio.nombre}"></option>
+                    </th:block>
+                </select>
+                
+                <label class="col-form-label">Fecha consumo</label>
+                <input class="form-control" type="date" id="fecha"
+                name="fecha"/>
+
+                <label class="col-form-label">Veces consumido</label>
+                <input class="form-control" type="number" id="veces"
+                name="veces"/>
+
+                <label class="col-form-label">Número de documento</label>
+                <input class="form-control" type="text" id="num_documento"
+                name="num_documento"/>
+
+                <label class="col-form-label">Tipo de documento</label>
+                <select class="form-control" id="tipo_documento"
+                name="tipo_documento"> 
+                    <option value=""></option>
+                    <option value="CC">CC</option>
+                    <option value="CE">CE</option>
+                </select> 
+
+                <label class="col-form-label">Nombre cliente</label>
+                <input class="form-control" type="text" id="nombre"
+                name="nombre"/>
+
+                <label class="col-form-label">Correo</label>
+                <input class="form-control" type="text" id="correo"
+                name="correo"/>
+
+                <br>
+                
+                <div class="text-center mb-4">
+                    <button type="submit" class="btn btn-secondary mr-1">Buscar</button>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+    <div class="text-center">
+        <table class="table table-hover table-bordered mb-4 mt-4">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Número de documento</th>
+                    <th>Tipo de documento</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                    <th>Fecha</th>   
+                    <th>Veces consumido</th>   
+                </tr>
+            </thead>
+            <th:block th:each="consumo:${clientesConsumo}">
+                <tr>
+                    <td th:text="${consumo.cliente.num_documento}"></td>
+                    <td th:text="${consumo.cliente.tipo_documento}"></td>
+                    <td th:text="${consumo.cliente.nombre}"></td>
+                    <td th:text="${consumo.cliente.correo}"></td>
+                    <td th:text="${consumo.fecha}"></td>
+                    <td th:text="${consumo.veces}"></td>
+                </tr>
+            </th:block>
+        </table>
+        <div class="text-center mb-4">
+            <a th:href="@{/consumos}" class="btn btn-primary">Volver atrás</a>
+        </div>
+    </div>
+    
+</body>
+</html>

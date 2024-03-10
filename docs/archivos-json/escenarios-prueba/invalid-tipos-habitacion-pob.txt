@@ -1,0 +1,4 @@
+db.tipos_habitacion.insertOne({_id: 4, nombre: "Suite doble", capacidad: 7.5});
+
+db.tipos_habitacion.insertOne({_id: 4, nombre: "Suite doble", capacidad: 7, 
+dotacion_incluida: [{nombre: "Cama"}]})

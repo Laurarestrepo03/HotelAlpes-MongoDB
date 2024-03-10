@@ -1,0 +1,48 @@
+db.habitaciones.aggregate([
+  {
+    $unwind: { path: '$consumos', preserveNullAndEmptyArrays: true }
+  },
+  {
+    $lookup: {
+      from: 'servicios',
+      localField: 'consumos.servicio',
+      foreignField: '_id',
+      as: 'servicio'
+    }
+  },
+  {
+    $unwind: { path: '$servicio', preserveNullAndEmptyArrays: true }
+  },
+  {
+    $group: {
+      _id: '$_id',
+      dinero: {
+        $sum: {
+          $add: [
+            {
+              $cond: [
+                {
+                  $and: [
+                    { $gte: ['$consumos.fecha', ?0] },
+                    { $lte: ['$consumos.fecha', ?1] }
+                  ]
+                },
+                { $ifNull: ['$servicio.precio', 0] },
+                0
+              ]
+            }
+          ]
+        }
+      },
+      habitacion: { $first: '$_id' }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      habitacion: '$habitacion',
+      dinero: '$dinero'
+    }
+  },
+  { $sort: { habitacion: 1 } }
+]);

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragmento</title>
+    <link rel="stylesheet" text="text/css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div th:fragment="servicioForm(titulo)" class="container w-25 mt-4">
+        <h1 class="text-center" th:text="${titulo}"></h1>
+        <form>
+
+            <label class="col-form-label">Nombre</label>
+            <input class="form-control" type="texto" id="nombre"
+            name="nombre" required th:value="${servicio.nombre}" />
+
+            <label class="col-form-label">Tipo cobro</label>
+            <select class="form-control" id="tipo_cobro"
+            name="tipo_cobro" required> 
+                <option value="Alojamiento" th:selected="${servicio.tipo_cobro eq 'Alojamiento'}">Alojamiento</option>
+                <option value="Gratuito" th:selected="${servicio.tipo_cobro eq 'Gratuito'}">Gratuito</option>
+                <option value="Habitacion" th:selected="${servicio.tipo_cobro eq 'Habitacion'}">Habitación</option>
+                <option value="Por dia" th:selected="${servicio.tipo_cobro eq 'Por dia'}">Por día</option>
+            </select> 
+
+            <label class="col-form-label">Precio</label>
+            <input class="form-control" type="number" id="precio"
+            name="precio" required th:value="${servicio.precio}" />
+
+            <label class="col-form-label">Capacidad</label>
+            <input class="form-control" type="number" id="capacidad"
+            name="capacidad" required th:value="${servicio.capacidad}" />
+
+            <label class="col-form-label">Estilo</label>
+            <input class="form-control" type="texto" id="estilo"
+            name="estilo" th:value="${servicio.estilo}" />
+
+            <label class="col-form-label">Costo adicional</label>
+            <input class="form-control" type="number" id="costo_adicional"
+            name="costo_adicional" required th:value="${servicio.costo_adicional}" />
+
+            <br>
+
+            <div class="text-center mb-4">
+                <a th:href="@{/servicios}" class="btn btn-primary mr-1">Cancelar</a>
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</body>
+</html>

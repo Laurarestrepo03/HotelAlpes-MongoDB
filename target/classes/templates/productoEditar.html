@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar dotación incluída</title>
+    <link rel="stylesheet" text="text/css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <form th:action="@{'/servicios/' + ${id} + '/productos/' + ${id_producto} + '/edit/save'}" th:object="${producto}" method="POST">
+        <div th:replace="~{fragments/productoForm :: productoForm(titulo='Editar producto', 
+        producto=${producto})}"></div>
+    </form>
+</body>
+</html>

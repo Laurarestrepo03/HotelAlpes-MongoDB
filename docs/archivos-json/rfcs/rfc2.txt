@@ -1,0 +1,115 @@
+db.habitaciones.aggregate([
+    { $unwind: { path: '$reservas', preserveNullAndEmptyArrays: true } },
+    {
+        $project: {
+            _id: 1,
+            total_dias: {
+                $ifNull: [
+                    {
+                        $divide: [
+                            {
+                                $add: [
+                                    {
+                                        $cond: [
+                                            {
+                                                $and: [
+                                                    { $gte: [{ $toDate: '$reservas.fecha_entrada' }, { $toDate: ?0 }] },
+                                                    { $lte: [{ $toDate: '$reservas.fecha_salida' }, { $toDate: ?1 }] }
+                                                ]
+                                            },
+                                            {
+                                                $subtract: [
+                                                    { $toDate: '$reservas.fecha_salida' },
+                                                    { $toDate: '$reservas.fecha_entrada' }
+                                                ]
+                                            },
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        $cond: [
+                                            {
+                                                $and: [
+                                                    { $gt: [{ $toDate: '$reservas.fecha_salida' }, { $toDate: ?1 }] },
+                                                    { $gte: [{ $toDate: '$reservas.fecha_entrada' }, { $toDate: ?0 }] },
+                                                    { $lte: [{ $toDate: '$reservas.fecha_entrada' }, { $toDate: ?1 }] }
+                                                ]
+                                            },
+                                            {
+                                                $subtract: [
+                                                    { $toDate: ?1 },
+                                                    { $toDate: '$reservas.fecha_entrada' }
+                                                ]
+                                            },
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        $cond: [
+                                            {
+                                                $and: [
+                                                    { $lt: [{ $toDate: '$reservas.fecha_entrada' }, { $toDate: ?0 }] },
+                                                    { $lte: [{ $toDate: '$reservas.fecha_salida' }, { $toDate: ?1 }] },
+                                                    { $gte: [{ $toDate: '$reservas.fecha_salida' }, { $toDate: ?0 }] }
+                                                ]
+                                            },
+                                            {
+                                                $subtract: [
+                                                    { $toDate: '$reservas.fecha_salida' },
+                                                    { $toDate: ?0 }
+                                                ]
+                                            },
+                                            0
+                                        ]
+                                    },
+                                    {
+                                        $cond: [
+                                            {
+                                                $and: [
+                                                    { $lte: [{ $toDate: '$reservas.fecha_entrada' }, { $toDate: ?0 }] },
+                                                    { $gte: [{ $toDate: '$reservas.fecha_salida' }, { $toDate: ?1 }] }
+                                                ]
+                                            },
+                                            ?2,
+                                            0
+                                        ]
+                                    }
+                                ]
+                            },
+                            86400000
+                        ]
+                    },
+                    0
+                ]
+            }
+        }
+    },
+    {
+        $group: {
+            _id: '$_id',
+            total_dias: { $sum: '$total_dias' }
+        }
+    },
+    {
+        $project: {
+            _id: '$_id',
+            porcentaje: {
+                $round: [
+                    {
+                        $multiply: [
+                            {
+                                $divide: [
+                                    '$total_dias',
+                                    ?2
+                                ]
+                            },
+                            100
+                        ]
+                    },
+                    2
+                ]
+            }
+        }
+    },
+    { $sort: { habitacion: 1 } }
+])

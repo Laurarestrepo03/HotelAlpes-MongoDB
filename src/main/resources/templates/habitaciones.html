@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Habitaciones</title>
+    <link rel="stylesheet" text="text/css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="mt-4 mb-4">Habitaciones</h1>
+        <div class="mb-4">
+            <a th:href="@{habitaciones/dineroRecolectado}" class="btn btn-info mr-1">Dinero recolectado</a>
+            <a th:href="@{habitaciones/indiceOcupacion}" class="btn btn-info">Índice de ocupación</a>
+        </div>
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Número de habitación</th>
+                    <th>Tipo</th>
+                    <th>Costo noche</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <th:block th:each="habitacion:${habitaciones}">
+                <tr>
+                    <td th:text="${habitacion.id}"></td>
+                    <td th:text="${habitacion.tipo}"></td>
+                    <td th:text="'$' + ${habitacion.costo_noche}"></td>
+                    <td>
+                        <a th:href="@{habitaciones/{id}/edit(id=${habitacion.id})}">Editar</a>
+                        <a th:href="@{habitaciones/{id}/delete(id=${habitacion.id})}"
+                        onClick="return confirm('¿Estás seguro de borrar esta habitación?')">Borrar</a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+        <div class="mt-4 mb-4">
+            <a th:href="@{/}" class="btn btn-primary mr-1">Volver atrás</a>
+            <a th:href="@{habitaciones/new}" class="btn btn-primary">Añadir habitación </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+db.habitaciones.aggregate([
+  {
+    $unwind: { path: '$consumos', preserveNullAndEmptyArrays: true }
+  },
+  {
+    $lookup: {
+      from: 'servicios',
+      localField: 'consumos.servicio',
+      foreignField: '_id',
+      as: 'servicio'
+    }
+  },
+  {
+    $unwind: { path: '$servicio', preserveNullAndEmptyArrays: true }
+  },
+  {
+    $group: {
+      _id: '$_id',
+      dinero: {
+        $sum: {
+          $add: [
+            {
+              $cond: [
+                {
+                  $and: [
+                    { $gte: ['$consumos.fecha', "2023-01-01"] },
+                    { $lte: ['$consumos.fecha', "2023-12-01"] }
+                  ]
+                },
+                { $ifNull: ['$servicio.precio', 0] },
+                0
+              ]
+            }
+          ]
+        }
+      },
+      habitacion: { $first: '$_id' }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      habitacion: '$habitacion',
+      dinero: '$dinero'
+    }
+  },
+  { $sort: { habitacion: 1 } }
+]);
+
+
+Esto debería devolver:
+{
+  habitacion: 101,
+  dinero: 1000
+},
+{
+  habitacion: 102,
+  dinero: 0
+},
+{
+  habitacion: 103,
+  dinero: 0
+},
+{
+  habitacion: 201,
+  dinero: 0
+},
+{
+  habitacion: 202,
+  dinero: 100000
+},
+{
+  habitacion: 203,
+  dinero: 0
+},
+{
+  habitacion: 301,
+  dinero: 0
+},
+{
+  habitacion: 302,
+  dinero: 0
+},
+{
+  habitacion: 303,
+  dinero: 0
+}

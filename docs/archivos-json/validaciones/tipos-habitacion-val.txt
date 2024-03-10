@@ -1,0 +1,43 @@
+{
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      '_id',
+      'nombre',
+      'capacidad'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'int'
+      },
+      nombre: {
+        bsonType: 'string'
+      },
+      capacidad: {
+        bsonType: 'int'
+      },
+      dotacion_incluida: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'object',
+          required: [
+            '_id',
+            'nombre',
+            'cantidad'
+          ],
+          properties: {
+            _id: {
+              bsonType: 'int'
+            },
+            nombre: {
+              bsonType: 'string'
+            },
+            cantidad: {
+              bsonType: 'int'
+            }
+          }
+        }
+      }
+    }
+  }
+}

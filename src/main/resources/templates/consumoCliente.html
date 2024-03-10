@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consumos usuario</title>
+    <link rel="stylesheet" text="text/css" th:href="@{/css/bootstrap.min.css}" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="container w-25 mt-4">
+        
+        <h3 class="card-header text-center" role='button' id="headingOne">
+            <a class="collapsed d-block" data-toggle="collapse" data-target="#busqueda"> Buscar por: </a>
+        </h3>
+
+        <div id="busqueda" class="collapse">
+            <form th:action="@{/consumos/cliente}" method="get">
+                
+                <label class="col-form-label">Cliente</label>
+                <input class="form-control" type="text" id="cliente"
+                name="cliente" value="" required/>
+
+                <label class="col-form-label">Consumido desde</label>
+                <input class="form-control" type="date" id="fecha_inicio"
+                name="fecha_inicio" value="" required/>
+
+                <label class="col-form-label">Consumido hasta</label>
+                <input class="form-control" type="date" id="fecha_fin"
+                name="fecha_fin" value="" required/>
+                
+                <br>
+                
+                <div class="text-center mb-4">
+                    <button type="submit" class="btn btn-secondary mr-1">Buscar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="text-center">
+        <table class="table table-hover table-bordered mb-4 mt-4">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Servicio</th>
+                    <th>Cliente</th>
+                    <th>Habitación</th>
+                    <th>Costo</th>
+                    <th>Fecha</th>
+                    <th>Hora</th>
+                </tr>
+            </thead>
+            <th:block th:each="consumo:${consumoCliente}">
+                <tr>
+                    <td th:text="${consumo.id}"></td>
+                    <td th:text="${consumo.servicio}"></td>
+                    <td th:text="${consumo.cliente}"></td>
+                    <td th:text="${consumo.habitacion}"></td>
+                    <td th:text="'$' + ${consumo.costo}"></td>
+                    <td th:text="${consumo.fecha}"></td>
+                    <td th:text="${consumo.hora}"></td>
+                </tr>
+            </th:block>
+        </table>
+        <div class="text-center mb-4">
+            <a th:href="@{/consumos}" class="btn btn-primary mr-1">Volver atrás</a>
+        </div>
+    </div>
+    
+</body>
+</html>

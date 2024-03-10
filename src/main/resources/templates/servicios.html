@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios</title>
+    <link rel="stylesheet" text="text/css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="mt-4 mb-4">Servicios</h1>
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Tipo cobro</th>
+                    <th>Precio</th>
+                    <th>Capacidad</th>
+                    <th>Estilo</th>
+                    <th>Productos</th>
+                    <th>Costo adicional</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <th:block th:each="servicio:${servicios}">
+                <tr>
+                    <td th:text="${servicio.id}"></td>
+                    <td th:text="${servicio.nombre}"></td>
+                    <td th:text="${servicio.tipo_cobro}"></td>
+                    <td th:text="'$' + ${servicio.precio}"></td>
+                    <td th:text="${servicio.capacidad}"></td>
+                    <td th:text="${servicio.estilo}"></td>
+                    <td> <a th:href="@{servicios/{id}/productos(id=${servicio.id})}">Ver</a> </td>
+                    <td th:text="'$' + ${servicio.costo_adicional}"></td>
+                    <td>
+                        <a th:href="@{servicios/{id}/edit(id=${servicio.id})}">Editar</a>
+                        <a th:href="@{servicios/{id}/delete(id=${servicio.id})}"
+                        onClick="return confirm('¿Estás seguro de borrar este servicio?')">Borrar</a>
+                    </td>
+                </tr>
+            </th:block>
+        </table>
+        <div class="mt-4 mb-4">
+            <a th:href="@{/}" class="btn btn-primary mr-1">Volver atrás</a>
+            <a th:href="@{servicios/new}" class="btn btn-primary">Añadir servicio </a>
+        </div>
+    </div>
+</body>
+</html>

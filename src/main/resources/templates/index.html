@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel de los Andes</title>
+    <link rel="stylesheet" text="text/css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    
+    <div class="container d-flex justify-content-center align-items-center">
+        <div class="text-center">
+            <h1 class="mb-4 mt-4">Hotel de los Andes</h1>
+            <img class="mb-4" th:src="@{/images/bellman.png}" width="250" alt="bellman"/>
+            <div class="mb-4">
+                <div class="mb-3">
+                    <a th:href="@{/tiposHabitacion}" class="btn btn-primary mr-1">Tipos de habitación</a>
+                    <a th:href="@{/habitaciones}" class="btn btn-primary mr-1">Habitaciones</a>
+                    <a th:href="@{/servicios}" class="btn btn-primary mr-1">Servicios</a>
+                    <a th:href="@{/reservas}" class="btn btn-primary mr-1">Reservas</a>
+                    <a th:href="@{/consumos}" class="btn btn-primary">Consumos de servicios</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+</body>
+</html>

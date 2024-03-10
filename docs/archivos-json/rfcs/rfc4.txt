@@ -1,0 +1,59 @@
+db.habitaciones.aggregate([
+  {
+    $unwind: "$reservas"
+  },
+  {
+    $unwind: "$consumos"
+  },
+  {
+    $match: {
+      $expr: {
+        $eq: ["$consumos.cliente", "$reservas.cliente.num_documento"]
+      }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      cliente: "$reservas.cliente",
+      fecha_consumo: "$consumos.fecha",
+      servicio_consumo: "$consumos.servicio",
+    }
+  },
+  {
+    $group: {
+      _id: {
+        cliente: "$cliente",
+        servicio: "$servicio_consumo",
+        fecha: "$fecha_consumo"
+      },
+      veces: { $sum: 1 }
+    }
+  },
+  {
+    $project: {
+      _id: 0,
+      cliente: "$_id.cliente",
+      servicio: "$_id.servicio",
+      fecha: "$_id.fecha",
+      veces: 1
+    }
+  },
+  {
+    $match: {
+        servicio: ?0,
+        fecha: { $regex: ?1 },
+        $expr: {
+            $cond: {
+                if: { $eq: [?2, null] },
+                then: {},
+                else: { $eq: ["$veces", ?2] }
+            }
+        },
+        "cliente.num_documento": { $regex: ?3 },
+        "cliente.tipo_documento": { $regex: ?4 },
+        "cliente.nombre": { $regex: ?5 },
+        "cliente.correo": { $regex: ?6 }
+    }
+  }
+]);

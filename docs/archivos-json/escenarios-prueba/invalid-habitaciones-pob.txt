@@ -1,0 +1,13 @@
+db.habitaciones.insertOne({_id: 401, "costo_noche": 500000, tipo: "Familiar"});
+
+db.habitaciones.insertOne({_id: 401, "costo_noche": 500000, tipo: 1, 
+consumos: [{_id: 6, servicio: 1, cliente: "1006", fecha: new Date(), hora: "10:00"}]});
+
+db.habitaciones.insertOne({_id: 401, "costo_noche": 500000, tipo: 1, 
+reservas: [{codigo: 9, fecha_entrada: "2023-12-25", fecha_salida: "2023-12-31", estado: "Ninguno", num_huespedes: 1,
+cliente: {num_documento: "1006", tipo_documento: "CC", nombre: "Laura", correo: "l.restrepop@uniandes.edu.co"}}]});
+
+db.habitaciones.insertOne({_id: 401, "costo_noche": 500000, tipo: 1, 
+reservas: [{codigo: 9, fecha_entrada: "2023-12-25", fecha_salida: "2023-12-31", estado: "Por entrar", num_huespedes: 1,
+cliente: {tipo_documento: "CC", nombre: "Laura", correo: "l.restrepop@uniandes.edu.co"}}]});
+

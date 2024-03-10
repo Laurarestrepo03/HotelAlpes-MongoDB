@@ -1,0 +1,4 @@
+db.servicios.insertOne({_id: 16, nombre: "Servicio", tipo_cobro: "Ninguno", precio: 10000, capacidad: 5});
+
+db.servicios.insertOne({_id: 16, nombre: "Servicio", tipo_cobro: "Por dia", precio: 10000, capacidad: 5, 
+productos: [{nombre: "Pepsi 250ml"}]});

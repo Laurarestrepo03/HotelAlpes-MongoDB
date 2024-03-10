@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear tipo de habitación</title>
+    <link rel="stylesheet" text="text/css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <form action="#" th:action="@{/tiposHabitacion/new/save}" method="POST">
+        <div th:replace="~{fragments/tipoHabitacionForm :: tipoHabitacionForm(titulo='Crear tipo de habitación')}"></div>
+    </form>
+</body>
+</html>

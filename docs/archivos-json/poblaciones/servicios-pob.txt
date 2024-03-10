@@ -1,0 +1,171 @@
+db.servicios.insertMany([
+    {
+        "_id": 1,
+        "nombre": "Gimnasio",
+        "tipo_cobro": "Alojamiento",
+        "precio": 50000,
+        "capacidad": 100,
+        "estilo": "",
+        "costo_adicional": 0
+    },
+    {
+        "_id": 2,
+        "nombre": "Piscina",
+        "tipo_cobro": "Gratuito",
+        "precio": 0,
+        "capacidad": 150,
+        "estilo": "",
+        "costo_adicional": 0
+    },
+    {
+        "_id": 3,
+        "nombre": "Internet",
+        "tipo_cobro": "Habitacion",
+        "precio": 10000,
+        "capacidad": 50,
+        "estilo": "",
+        "costo_adicional": 0
+    },
+    {
+        "_id": 4,
+        "nombre": "Bar",
+        "tipo_cobro": "Habitacion",
+        "precio": 1000,
+        "capacidad": 50,
+        "estilo": "Inglés",
+        "costo_adicional": 0,
+        "productos": [
+            {
+                "_id": 1,
+                "nombre": "Coca Cola 250 ml",
+                "precio": 4500
+            },
+            {
+                "_id": 2,
+                "nombre": "Papas Margarita Limón",
+                "precio": 3500
+            },
+            {
+                "_id": 3,
+                "nombre": "Agua con gas 250ml",
+                "precio": 3000
+            }
+        ]
+    },
+    {
+        "_id": 5,
+        "nombre": "Restaurante",
+        "tipo_cobro": "Alojamiento",
+        "precio": 5000,
+        "capacidad": 40,
+        "estilo": "Gourmet",
+        "costo_adicional": 0,
+        "productos": [
+            {
+                "_id": 1,
+                "nombre": "Ajiaco",
+                "precio": 15000
+            },
+            {
+                "_id": 2,
+                "nombre": "Bandeja paisa",
+                "precio": 30000
+            },
+            {
+                "_id": 3,
+                "nombre": "Arroz con pollo",
+                "precio": 20000
+            }
+        ]
+    },
+    {
+        "_id": 6,
+        "nombre": "Supermercado",
+        "tipo_cobro": "Gratuito",
+        "precio": 0,
+        "capacidad": 200,
+        "estilo": "",
+        "costo_adicional": 0
+    },
+    {
+        "_id": 7,
+        "nombre": "Tienda joyería",
+        "tipo_cobro": "Gratuito",
+        "precio": 0,
+        "capacidad": 20,
+        "estilo": "",
+        "costo_adicional": 0
+    },
+    {
+        "_id": 8,
+        "nombre": "Tienda ropa",
+        "tipo_cobro": "Gratuito",
+        "precio": 0,
+        "capacidad": 30,
+        "estilo": "",
+        "costo_adicional": 0
+    },
+    {
+        "_id": 9,
+        "nombre": "Spa",
+        "tipo_cobro": "Alojamiento",
+        "precio": 150000,
+        "capacidad": 15,
+        "estilo": "",
+        "costo_adicional": 0
+    },
+    {
+        "_id": 10,
+        "nombre": "Lavado",
+        "tipo_cobro": "Habitacion",
+        "precio": 20000,
+        "capacidad": 10,
+        "estilo": "",
+        "costo_adicional": 0
+    },
+    {
+        "_id": 11,
+        "nombre": "Planchado",
+        "tipo_cobro": "Habitacion",
+        "precio": 15000,
+        "capacidad": 10,
+        "estilo": "",
+        "costo_adicional": 0
+    },
+    {
+        "_id": 12,
+        "nombre": "Embolada",
+        "tipo_cobro": "Habitacion",
+        "precio": 10000,
+        "capacidad": 0,
+        "estilo": "",
+        "costo_adicional": 0
+    },
+    {
+        "_id": 13,
+        "nombre": "Salón de reunión",
+        "tipo_cobro": "Alojamiento",
+        "precio": 200000,
+        "capacidad": 20,
+        "estilo": "",
+        "costo_adicional": 0
+    },
+    {
+        "_id": 14,
+        "nombre": "Salón de conferencia",
+        "tipo_cobro": "Alojamiento",
+        "precio": 500000,
+        "capacidad": 200,
+        "estilo": "",
+        "costo_adicional": 0
+    },
+    {
+        "_id": 15,
+        "nombre": "Utensilios",
+        "tipo_cobro": "Por dia",
+        "precio": 20000,
+        "capacidad": 5,
+        "estilo": "",
+        "costo_adicional": 0
+    }   
+]);

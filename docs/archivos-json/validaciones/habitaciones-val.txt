@@ -1,0 +1,116 @@
+{
+  $jsonSchema: {
+    bsonType: 'object',
+    required: [
+      '_id',
+      'costo_noche',
+      'tipo'
+    ],
+    properties: {
+      _id: {
+        bsonType: 'int'
+      },
+      costo_noche: {
+        bsonType: [
+          'int',
+          'double'
+        ]
+      },
+      tipo: {
+        bsonType: 'int'
+      },
+      consumos: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'object',
+          required: [
+            '_id',
+            'servicio',
+            'cliente',
+            'fecha',
+            'hora'
+          ],
+          properties: {
+            _id: {
+              bsonType: 'int'
+            },
+            servicio: {
+              bsonType: 'int'
+            },
+            cliente: {
+              bsonType: 'string'
+            },
+            fecha: {
+              bsonType: 'string'
+            },
+            hora: {
+              bsonType: 'string'
+            }
+          }
+        }
+      },
+      reservas: {
+        bsonType: 'array',
+        items: {
+          bsonType: 'object',
+          required: [
+            'codigo',
+            'fecha_entrada',
+            'fecha_salida',
+            'estado',
+            'num_huespedes',
+            'cliente'
+          ],
+          properties: {
+            codigo: {
+              bsonType: 'int'
+            },
+            fecha_entrada: {
+              bsonType: 'string'
+            },
+            fecha_salida: {
+              bsonType: 'string'
+            },
+            estado: {
+              'enum': [
+                'Por entrar',
+                'Entro',
+                'Salio con deuda',
+                'Salio sin deuda'
+              ]
+            },
+            num_huespedes: {
+              bsonType: 'int'
+            },
+            cliente: {
+              bsonType: 'object',
+              required: [
+                'num_documento',
+                'tipo_documento',
+                'nombre',
+                'correo'
+              ],
+              properties: {
+                num_documento: {
+                  bsonType: 'string'
+                },
+                tipo_documento: {
+                  'enum': [
+                    'CC',
+                    'CE'
+                  ]
+                },
+                nombre: {
+                  bsonType: 'string'
+                },
+                correo: {
+                  bsonType: 'string'
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

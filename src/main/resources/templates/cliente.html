@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cliente reserva</title>
+    <link rel="stylesheet" text="text/css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div class="text-center">
+        <h1 class="mt-4 mb-4">Cliente reserva <span th:text="${codigo_reserva}"></span> </h1>
+        <table class="table table-hover table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Número de documento</th>
+                    <th>Tipo de documento</th>
+                    <th>Nombre</th>
+                    <th>Correo</th>
+                </tr>
+            </thead>
+            
+            <tr>
+                <td th:text="${cliente.num_documento}"></td>
+                <td th:text="${cliente.tipo_documento}"></td>
+                <td th:text="${cliente.nombre}"></td>
+                <td th:text="${cliente.correo}"></td>
+            </tr>
+            
+        </table>
+        <div class="mt-4 mb-4">
+            <a th:href="@{/reservas}" class="btn btn-primary mr-1">Volver atrás</a>
+        </div>
+    </div>
+    
+</body>
+</html>

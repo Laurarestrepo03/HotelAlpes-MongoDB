@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar dotación incluída</title>
+    <link rel="stylesheet" text="text/css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <form th:action="@{'/tiposHabitacion/' + ${id} + '/dotacion/' + ${id_dotacion} + '/edit/save'}" th:object="${dotacionIncluida}" method="POST">
+        <div th:replace="~{fragments/dotacionForm :: dotacionForm(titulo='Editar dotación', 
+        dotacionIncluida=${dotacionIncluida})}"></div>
+    </form>
+</body>
+</html>
